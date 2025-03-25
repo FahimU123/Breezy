@@ -35,11 +35,4 @@ import WeatherKit
         
         return String(Int(convert)) + "°F"
     }
-    
-    var humidity: String {
-        guard let humidity = weather?.currentWeather.humidity else { return "--" }
-        let computedHumidity = humidity * 100
-        
-        return String(Int(computedHumidity)) + "%"
-    }
 }
