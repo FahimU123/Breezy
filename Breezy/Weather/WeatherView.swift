@@ -11,6 +11,7 @@ import CoreLocation
 struct WeatherView: View {
     
     @State private var weatherManager = WeatherManager()
+
     
     let detroit = CLLocation(latitude: 42.3297, longitude: -83.0425)
     
@@ -22,6 +23,7 @@ struct WeatherView: View {
                 .padding()
             Text("Detroit")
             Text("Temperature: \(weatherManager.temperature)")
+
         }
         .onAppear {
             Task {
