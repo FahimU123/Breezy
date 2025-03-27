@@ -11,11 +11,7 @@ import CoreLocation
 struct WeatherView: View {
     
     @State private var weatherManager = WeatherManager()
-    @State private var outfit = OutfitRecommender.Recommendation(
-            top: .tshirt,
-            bottom: .jeans,
-            shoes: .sneakers
-        )
+
     
     let detroit = CLLocation(latitude: 42.3297, longitude: -83.0425)
     
@@ -27,8 +23,7 @@ struct WeatherView: View {
                 .padding()
             Text("Detroit")
             Text("Temperature: \(weatherManager.temperature)")
-            
-            Image(outfit.top.rawValue)
+
         }
         .onAppear {
             Task {

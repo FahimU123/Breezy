@@ -17,7 +17,7 @@ struct CalendarView: View {
                 Text(title)
             }
             .onAppear {
-                calendar.fetchEventsFromCalendar()
+
         }
     }
 

@@ -45,8 +45,6 @@ class CalendarEvents {
                         titles.append(event.title)
                         startDates.append(event.startDate as Date)
                         endDates.append(event.endDate as Date)
-                }
-            }
-        }
+
     }
 }
