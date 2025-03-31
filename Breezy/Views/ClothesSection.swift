@@ -14,6 +14,7 @@ struct ClotheSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
+            
             HStack {
                 Text(title)
                     .font(.system(size: 20, weight: .semibold))
