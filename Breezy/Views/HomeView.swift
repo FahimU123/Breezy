@@ -6,17 +6,26 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct HomeView: View {
-    let weatherManager = WeatherManager()
+    
+    @State var weatherManager: WeatherManager
+    
     var recommender: OutfitRecommender {
         OutfitRecommender(weatherManager: weatherManager)
     }
-
+    @State var outfit: OutfitRecommender.Recommendation?
+    
+    let detroit = CLLocation(latitude: 42.3297, longitude: -83.0425)
+    
+    init(weatherManager: WeatherManager){
+        self.weatherManager = weatherManager
+    }
     var body: some View {
-        let outfit = recommender.recommendOutfit()
+        
 
-        return ZStack {
+         ZStack {
             Image("container1")
                 .resizable()
                 .scaledToFill()
@@ -27,7 +36,7 @@ struct HomeView: View {
                     ZStack {
                         Image("2Rectangle")
                             .frame(width: 200, height: 200)
-                        WeatherView()
+                        WeatherView(weatherManager: weatherManager)
                     }
 
                     Image("1Rectangle")
@@ -57,10 +66,14 @@ struct HomeView: View {
                         .foregroundColor(.black)
                 }
                 .padding(.top, 50)
+                
+                if let outfit = outfit {
+                    ClotheSection(title: "Top", imageNames: outfit.top.map { $0.rawValue })
+                    ClotheSection(title: "Bottom", imageNames: outfit.bottom.map { $0.rawValue })
+                    ClotheSection(title: "Shoes", imageNames: outfit.shoes.map { $0.rawValue })
+                }
 
-                ClotheSection(title: "Top", imageNames: outfit.top.map { $0.rawValue })
-                ClotheSection(title: "Bottom", imageNames: outfit.bottom.map { $0.rawValue })
-                ClotheSection(title: "Shoes", imageNames: outfit.shoes.map { $0.rawValue })
+               
 
 
 
@@ -69,10 +82,19 @@ struct HomeView: View {
             .padding(.horizontal, 60)
             .frame(maxWidth: 1000, maxHeight: 550)
         }
+        .onAppear {
+            Task {
+                await weatherManager.getWeather(
+                    lat: detroit.coordinate.latitude,
+                    long: detroit.coordinate.longitude
+                )
+                outfit = recommender.recommendOutfit()
+            }
+        }
     }
 }
 
-
-#Preview {
-    HomeView()
-}
+//
+//#Preview {
+//    HomeView()
+//}

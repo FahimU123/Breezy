@@ -9,9 +9,14 @@ import SwiftUI
 import CoreLocation
 
 struct WeatherView: View {
-    @State private var weatherManager = WeatherManager()
     
-    let detroit = CLLocation(latitude: 42.3297, longitude: -83.0425)
+    let weatherManager: WeatherManager
+    // why is this still needed?
+    init(weatherManager: WeatherManager) {
+        self.weatherManager = weatherManager
+    }
+    
+    let detroit = CLLocation(latitude: 6.1944, longitude: 106.8229)
 
     var body: some View {
         VStack(spacing: 8) {
@@ -41,6 +46,10 @@ struct WeatherView: View {
     }
 }
 
-#Preview {
-    WeatherView()
-}
+//#Preview {
+//    WeatherView()
+//}
+
+//
+
+//weathermonger is a class so its needs to always be initialized unlike structs which automatically have initializer, now because how my proejct is setup and content view leads to home view which also leads to weather view  and both of them need a weather manger I can just declare it in content view an d se it = to a weathermanger and just in home views and weather view just declare it and initialize it because classes always require intializations

@@ -11,9 +11,11 @@ struct ContentView: View {
     
     @State private var viewModel = ViewModel()
     
+    @State var weatherManager = WeatherManager()
+    
     var body: some View {
         
-        HomeView()
+        HomeView(weatherManager: weatherManager)
 
     }
 }
