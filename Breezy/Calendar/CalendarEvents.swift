@@ -9,7 +9,7 @@ import EventKit
 
 class CalendarEvents {
     let eventStore = EKEventStore()
-    var titles: [String] = ["fake data", "more fake data"]
+    var titles: [String] = ["Dinner at Moms", "Job Interview"]
     var startDates: [Date] = [Date(), Date()]
     var endDates: [Date] = [Date(), Date()]
     

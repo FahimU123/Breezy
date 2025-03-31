@@ -9,30 +9,38 @@ import SwiftUI
 import CoreLocation
 
 struct WeatherView: View {
-    
     @State private var weatherManager = WeatherManager()
-
     
     let detroit = CLLocation(latitude: 42.3297, longitude: -83.0425)
-    
-    var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: weatherManager.icon)
-                .font(.largeTitle)
-                .shadow(radius: 2)
-                .padding()
-            Text("Detroit")
-            Text("Temperature: \(weatherManager.temperature)")
 
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: weatherManager.icon)
+                .font(.system(size: 40, weight: .bold))
+                .foregroundColor(.white)
+                .shadow(radius: 4)
+                .padding(.top, 8)
+
+            Text("Detroit")
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+
+            Text("\(weatherManager.temperature)°")
+                .font(.title)
+                .fontWeight(.semibold)
         }
         .onAppear {
             Task {
-                await weatherManager.getWeather(lat: detroit.coordinate.latitude, long: detroit.coordinate.longitude)
+                await weatherManager.getWeather(
+                    lat: detroit.coordinate.latitude,
+                    long: detroit.coordinate.longitude
+                )
             }
         }
-        .font(.title3)
     }
 }
+
 #Preview {
     WeatherView()
 }
